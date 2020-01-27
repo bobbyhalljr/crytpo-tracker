@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { NavLink } from 'react-router-dom';
+import CoinInfo from '../components/CoinInfo';
+import Team from '../components/Team';
+import Website from '../components/Website';
+
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { FaArrowLeft, FaRegStar, FaRegThumbsUp, FaRegCommentDots } from 'react-icons/fa'
 
-const SingleCoin = ({ match, history }) => {
+const SingleCoin = ({ match, history}) => {
     const [coin, setCoin] = useState({
         team: [],
         whitepaper: {},
@@ -22,25 +26,77 @@ const SingleCoin = ({ match, history }) => {
             setCoin(res.data)
         })
         .catch(err => console.log(err))
-    },[getCoin])
+    },[setCoin])
 
     return (
         <div className='mx-6'>
             <div className=''>
-                <NavLink to={`/`} className=''>
-                    <button className='flex items-center justify-center bg-blue-500 text-md w-40 font-medium p-2 m-4 text-white rounded-lg'><FaArrowLeft /> <span className='ml-2'>Back to coins</span></button>
-                </NavLink>
+                <div className=''>
+                    <button onClick={() => history.goBack('/')} className='flex items-center justify-center bg-blue-500 text-md w-40 font-medium p-2 m-4 text-white rounded-lg'><FaArrowLeft /> <span className='ml-2'>Back to coins</span></button>
+                </div>
             </div>
             <div className='flex items-center justify-center mt-12'>
                 <h1 className='text-3xl font-bold mr-2'>{coin.name}</h1>
                 <h1 className='text-xl font-medium text-gray-500'>{coin.symbol}</h1>
             </div>
             <h3 className='mt-4 text-gray-600 text-xl font-medium'>{coin.description}</h3>
-            <div className='flex text-3xl justify-center mt-10 p-4'>
+            <div className='flex text-3xl justify-center mt-10 mb-6 px-4'>
                 <p className='mr-10 flex'><FaRegStar /> <span className='text-lg ml-2'>Favorite</span></p>
                 <p className='mr-10 flex'><FaRegThumbsUp /><span className='text-lg ml-2'>0</span></p>
                 <p className='flex'><FaRegCommentDots /><span className='text-lg ml-2'>0</span></p>
             </div>
+            <Tabs className='border-t-2 border-b-2'>
+                <TabList className='flex justify-center mt-10 p-4'>
+                <Tab className='mr-6 py-4 px-6'>Coin Info</Tab>
+                <Tab className='mr-6 py-4 px-6'>Team</Tab>
+                <Tab className='mr-6 py-4 px-6'>Website</Tab>
+                </TabList>
+            
+                <TabPanel selectedTabPanelClassName='tab-panel border-b-2 border-blue-600'>
+                    <CoinInfo coin={coin}/>
+                </TabPanel>
+                <TabPanel selectedTabPanelClassName='border-b-2 border-blue-600'>
+                    <Team coin={coin}/>
+                </TabPanel>
+                <TabPanel selectedTabPanelClassName='border-b-2 border-blue-600'>
+                    <Website coin={coin}/>
+                </TabPanel>
+            </Tabs>
+            {/* <div>
+                <div className="links">
+                    <NavLink to={`${path}/coin-info`} className="link">Coin Info</NavLink>
+                    <NavLink to={`${path}/team`} className="link">Team</NavLink>
+                    <NavLink to={`${path}/website`} className="link">Website</NavLink>
+                </div>
+                <div className="tabs">
+                    <Switch>
+                        <Route path={`${path}/coin-info`} exact component={CoinInfo} />
+                        <Route path={`${path}/team`} component={Team} />
+                        <Route path={`${path}/website`} component={Website} />
+                    </Switch>
+                </div>
+            </div> */}
+            {/* <div>
+                <button onClick={() => <CoinInfo />}>Coin Info</button>
+                <button>Team</button>
+                <button>Website</button>
+            </div> */}
+            {/* <div>
+                <NavTab to="/coin-info">Coin Info</NavTab>
+                <NavTab to="/team">Team</NavTab>
+                <NavTab to="/website">Website</NavTab>
+
+                <Switch>
+                    <Route
+                    exact
+                    path={`/${match.params.id}/${match.path}`}
+                    render={() => <Redirect replace to={`/${match.params.id}/${match.path}`} />}
+                    />
+                    <Route path={`/${match.params.id}/${match.path}`} component={CoinInfo} />
+                    <Route path={`/${match.params.id}/${match.path}`} component={Team} />
+                    <Route path={`/${match.params.id}/${match.path}`} component={Website} />
+                </Switch>
+            </div> */}
         </div>
     )
 

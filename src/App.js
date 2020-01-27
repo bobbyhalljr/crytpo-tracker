@@ -16,7 +16,7 @@ const App = () => {
       setCoins(res.data)
     })
     .catch(error => console.log(error))
-  },[])
+  },[setCoins])
 
   return (
     <div className="">
