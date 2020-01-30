@@ -25,18 +25,18 @@ const Coins = ({ coins }) => {
   }
 
   return (
-    <div className='overflow-x-hidden'>
+    <div className=''>
       <div className="flex sticky top-0 bg-gray-200 p-4 justify-center relative">
-        <div class="w-9/12">
+        <div class="w-11/12">
           <label class="inline-block text-gray-700 text-sm font-bold" for="search">
-            <FaSearchDollar className='text-3xl absolute top-0 left-0 ml-24 mt-6' />
+            <FaSearchDollar className='text-3xl absolute top-0 left-0 ml-16 mr-6 mt-6' />
           </label>
-          <input value={searchTerm} onChange={handleSearch} class="shadow-lg pl-16 border-2 appearance-none border rounded-full w-full py-2 px-6 text-lg text-gray-700 leading-normal focus:outline-none focus:shadow-outline" id="search" type="text" placeholder="Search for a cryptocurrency" />
+          <input value={searchTerm} onChange={handleSearch} class="shadow-lg border-2 appearance-none border rounded-full w-full py-2 px-24 text-lg text-gray-700 leading-normal focus:outline-none focus:shadow-outline" id="search" type="text" placeholder="Search for a cryptocurrency" />
         </div>
       </div>
       {coins.map(coin => {
         return (
-          <div key={coin.id} className="bg-gray-200 pt-6">
+          <div key={coin.id} className="bg-gray-200 pt-6 overflow-x-hidden">
             <div className="rounded-lg bg-white shadow-md py-10 m-auto px-10 mx-6 max-w-9/12">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
