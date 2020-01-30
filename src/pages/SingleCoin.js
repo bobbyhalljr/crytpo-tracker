@@ -6,9 +6,10 @@ import Team from '../components/Team';
 import Website from '../components/Website';
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { FaArrowLeft, FaRegStar, FaRegThumbsUp, FaRegCommentDots } from 'react-icons/fa'
+import { FaArrowLeft, FaRegHeart, FaRegThumbsUp, FaRegCommentDots } from 'react-icons/fa'
 
 const SingleCoin = ({ match, history}) => {
+    // coin
     const [coin, setCoin] = useState({
         team: [],
         whitepaper: {},
@@ -16,6 +17,17 @@ const SingleCoin = ({ match, history}) => {
             website: []
       }
     })
+
+    // favorites
+    const [favs, setFavs] = useState([])
+    // color
+    const yellow = '#FFD712';
+    const [clicked, setClicked] = useState(false)
+
+    // add to favs
+    const addToFavs = () => {
+        setClicked(!clicked)
+    }
 
     const getCoin = match.params.id;
 
@@ -41,15 +53,15 @@ const SingleCoin = ({ match, history}) => {
             </div>
             <h3 className='mt-4 text-gray-600 text-xl font-medium'>{coin.description}</h3>
             <div className='flex text-3xl justify-center mt-10 mb-6 px-4'>
-                <p className='mr-10 flex'><FaRegStar /> <span className='text-lg ml-2'>Favorite</span></p>
-                <p className='mr-10 flex'><FaRegThumbsUp /><span className='text-lg ml-2'>0</span></p>
-                <p className='flex'><FaRegCommentDots /><span className='text-lg ml-2'>0</span></p>
+                <button onClick={addToFavs} className='mr-10'><FaRegHeart className={clicked ? yellow : ''} /></button>
+                <button className='mr-10 flex'><FaRegThumbsUp /><span className='text-lg ml-2'>0</span></button>
+                <button className='flex'><FaRegCommentDots /><span className='text-lg ml-2'>0</span></button>
             </div>
-            <Tabs className='border-t-2 border-b-2'>
+            <Tabs onSelect={0, 2} className='border-t-2 border-b-2'>
                 <TabList className='flex justify-center mt-10 p-4'>
-                <Tab className='mr-6 py-4 px-6'>Coin Info</Tab>
-                <Tab className='mr-6 py-4 px-6'>Team</Tab>
-                <Tab className='mr-6 py-4 px-6'>Website</Tab>
+                <Tab className='border-b-4 border-blue-400 mr-6 py-4 px-6'>Coin Info</Tab>
+                <Tab className='border-b-4 border-blue-400 mr-6 py-4 px-6'>Team</Tab>
+                <Tab className='border-b-4 border-blue-400 mr-6 py-4 px-6'>Website</Tab>
                 </TabList>
             
                 <TabPanel selectedTabPanelClassName='tab-panel border-b-2 border-blue-600'>
