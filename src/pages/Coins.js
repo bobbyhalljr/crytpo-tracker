@@ -12,18 +12,10 @@ const searchClient = algoliasearch(
 
 const Coins = ({ coins }) => {
   const [searchTerm, setSearchTerm] = useState('')
-  // const [searchResults, setSearchResults] = useState([])
 
   const handleSearch = e => {
     setSearchTerm(e.target.value)
   }
-
-  // useEffect(() => {
-  //   const results = coins.filter(coin => {
-  //     coin.name.toLowerCase().includes(searchTerm)
-  //   })
-  //   setSearchTerm(results)
-  // }, [searchTerm])
 
   if (searchTerm.length > 0) {
     const pattern = new RegExp(searchTerm, 'i');
@@ -33,7 +25,7 @@ const Coins = ({ coins }) => {
   }
 
   return (
-    <>
+    <div className='overflow-x-hidden'>
       <div className="flex sticky top-0 bg-gray-200 p-4 justify-center relative">
         <div class="w-9/12">
           <label class="inline-block text-gray-700 text-sm font-bold" for="search">
@@ -83,7 +75,7 @@ const Coins = ({ coins }) => {
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
 

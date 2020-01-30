@@ -41,7 +41,7 @@ const SingleCoin = ({ match, history}) => {
     },[setCoin])
 
     return (
-        <div className='w-full'>
+        <div className='mx-10'>
             <div className=''>
                 <div className=''>
                     <button onClick={() => history.goBack('/')} className='flex items-center justify-center bg-blue-500 text-md w-40 font-medium p-2 m-4 text-white rounded-lg'><FaArrowLeft /> <span className='ml-2'>Back to coins</span></button>
