@@ -1,25 +1,51 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import algoliasearch from 'algoliasearch/lite';
+import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
 
 import { FaSearchDollar } from 'react-icons/fa';
 
+const searchClient = algoliasearch(
+  'latency',
+  '6be0576ff61c053d5f9a3225e2a90f76'
+);
+
 const Coins = ({ coins }) => {
+  const [searchTerm, setSearchTerm] = useState('')
+  // const [searchResults, setSearchResults] = useState([])
+
+  const handleSearch = e => {
+    setSearchTerm(e.target.value)
+  }
+
+  // useEffect(() => {
+  //   const results = coins.filter(coin => {
+  //     coin.name.toLowerCase().includes(searchTerm)
+  //   })
+  //   setSearchTerm(results)
+  // }, [searchTerm])
+
+  if (searchTerm.length > 0) {
+    const pattern = new RegExp(searchTerm, 'i');
+    coins = coins.filter(
+      coin => coin.name.match(pattern) || coin.symbol?.match(pattern)
+    );
+  }
+
   return (
     <>
       <div className="flex sticky top-0 bg-gray-200 p-4 justify-center relative">
         <div class="w-9/12">
           <label class="inline-block text-gray-700 text-sm font-bold" for="search">
-            <FaSearchDollar className='text-3xl absolute top-0 right-0 mr-32 mt-6' />
+            <FaSearchDollar className='text-3xl absolute top-0 left-0 ml-24 mt-6' />
           </label>
-          <input class="shadow-lg border-2 appearance-none border rounded-full w-full py-2 px-6 text-lg text-gray-700 leading-normal focus:outline-none focus:shadow-outline" id="search" type="text" placeholder="Search for a cryptocurrency" />
+          <input value={searchTerm} onChange={handleSearch} class="shadow-lg pl-16 border-2 appearance-none border rounded-full w-full py-2 px-6 text-lg text-gray-700 leading-normal focus:outline-none focus:shadow-outline" id="search" type="text" placeholder="Search for a cryptocurrency" />
         </div>
       </div>
       {coins.map(coin => {
         return (
           <div key={coin.id} className="bg-gray-200 pt-6">
-            {/* coin card */}
-            <div className="rounded-lg bg-white shadow-md p-10 mx-10">
-              {/* title */}
+            <div className="rounded-lg bg-white shadow-md py-10 m-auto px-10 mx-6 max-w-9/12">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <h1 className="text-2xl font-bold mr-2">{coin.name}</h1>
@@ -31,7 +57,6 @@ const Coins = ({ coins }) => {
                   <p className="bg-blue-200 text-blue-500 text-md border-solid border border-blue-500 font-semibold rounded-lg px-2">{`rank  ${coin.rank}`}</p>
                 </div>
               </div>
-              {/* stats */}
               <div className="mt-10 flex flex-col items-center">
                 <h3 className="text-gray-500 text-lg font-medium">
                   Market Cap
@@ -58,7 +83,6 @@ const Coins = ({ coins }) => {
           </div>
         );
       })}
-    {/* </div> */}
     </>
   );
 };
