@@ -31,7 +31,7 @@ const Coins = ({ coins }) => {
           <label class="inline-block text-gray-700 text-sm font-bold" for="search">
             <FaSearchDollar className='text-3xl absolute top-0 left-0 ml-16 mr-6 mt-6' />
           </label>
-          <input value={searchTerm} onChange={handleSearch} class="shadow-lg border-2 appearance-none border rounded-full w-full py-2 px-24 text-lg text-gray-700 leading-normal focus:outline-none focus:shadow-outline" id="search" type="text" placeholder="Search for a cryptocurrency" />
+          <input value={searchTerm} onChange={handleSearch} class="shadow-lg border-2 appearance-none border rounded-full w-full py-2 pl-20 text-lg text-gray-700 leading-normal focus:outline-none focus:shadow-outline" id="search" type="text" placeholder="Search for a cryptocurrency" />
         </div>
       </div>
       {coins.map(coin => {
