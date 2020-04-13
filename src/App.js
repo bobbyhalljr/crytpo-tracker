@@ -16,17 +16,19 @@ const App = () => {
       setCoins(res.data)
     })
     .catch(error => console.log(error))
-  },[setCoins])
+  },[])
 
   return (
     <div className="">
       <Navbar />
 
-      <Switch>
-        <Route exact path='/' render={props => <Coins {...props} coins={coins} />} />
-        <Route exact path='/:id' render={props => <SingleCoin {...props} coins={coins} />} />
-      </Switch>
-    </div>
+      {/* <div className=''> */}
+        <Switch>
+          <Route exact path='/' render={props => <Coins {...props} coins={coins} />} />
+          <Route exact path='/:id' render={props => <SingleCoin {...props} coins={coins} />} />
+        </Switch>
+      </div>
+    // </div>
   );
 }
 

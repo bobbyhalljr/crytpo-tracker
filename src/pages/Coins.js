@@ -1,14 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
 
 import { FaSearchDollar } from 'react-icons/fa';
-
-const searchClient = algoliasearch(
-  'latency',
-  '6be0576ff61c053d5f9a3225e2a90f76'
-);
 
 const Coins = ({ coins }) => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -37,7 +30,7 @@ const Coins = ({ coins }) => {
       {coins.map(coin => {
         return (
           <div key={coin.id} className="bg-gray-200 pt-6 overflow-x-hidden">
-            <div className="rounded-lg bg-white shadow-md py-10 m-auto px-10 mx-6 max-w-9/12">
+            <div className="rounded-lg max-w-4xl m-auto bg-white shadow-md mx-6 py-10 px-10 max-w-9/12">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <h1 className="text-2xl font-bold mr-2">{coin.name}</h1>
