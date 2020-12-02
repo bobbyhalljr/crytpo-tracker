@@ -52,11 +52,11 @@ const SingleCoin = ({ match, history}) => {
                 <h1 className='text-xl font-medium text-gray-500'>{coin.symbol}</h1>
             </div>
             <h3 className='mt-4 text-gray-600 text-xl font-medium'>{coin.description}</h3>
-            <div className='flex text-3xl justify-center mt-10 mb-6 px-4'>
+            {/* <div className='flex text-3xl justify-center mt-10 mb-6 px-4'>
                 <button onClick={addToFavs} className='mr-10'><FaRegHeart className={clicked ? yellow : ''} /></button>
                 <button className='mr-10 flex'><FaRegThumbsUp /><span className='text-lg ml-2'>0</span></button>
                 <button className='flex'><FaRegCommentDots /><span className='text-lg ml-2'>0</span></button>
-            </div>
+            </div> */}
             <Tabs onSelect={0, 2} className='border-t-2 border-b-2'>
                 <TabList className='flex justify-center mt-10 p-4'>
                 <Tab className='border-b-4 border-blue-400 mr-6 py-4 px-6'>Coin Info</Tab>
